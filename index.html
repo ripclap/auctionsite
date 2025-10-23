@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seattle Community Network Fundraising Auction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .jazz-section {
+            background: linear-gradient(to bottom, #1a1a2e, #16213e);
+            padding: 50px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .jazz-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=1200&h=400&fit=crop') center/cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        
+        .jazz-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .jazz-section h2 {
+            color: #ffd700;
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            font-family: 'Georgia', serif;
+            font-style: italic;
+        }
+        
+        .jazz-section p {
+            color: white;
+            font-size: 1.3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .jazz-image {
+            margin: 30px auto;
+            max-width: 800px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .jazz-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .auction-items {
+            padding: 50px 30px;
+            background: #f8f9fa;
+        }
+        
+        .auction-items h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #2a5298;
+            margin-bottom: 40px;
+        }
+        
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .item-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .item-header {
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .item-title {
+            font-size: 1.5em;
+            color: #2a5298;
+            margin-bottom: 5px;
+        }
+        
+        .item-coordinator {
+            color: #666;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+        
+        .item-description {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .value-box, .bid-box {
+            text-align: center;
+        }
+        
+        .label {
+            font-size: 0.85em;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .amount {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 5px;
+        }
+        
+        .bid-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: default;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .footer {
+            background: #2a5298;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .jazz-section h2 {
+                font-size: 2em;
+            }
+            
+            .items-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Seattle Community Network</h1>
+            <p>Fundraising Auction 2025</p>
+            <div style="margin-top: 25px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; backdrop-filter: blur(10px);">
+                <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 10px;">📅 November 7, 2025</div>
+                <div style="font-size: 1.2em; margin-bottom: 8px;">📍 Ada's Technical Books and Cafe</div>
+                <div style="font-size: 1em; opacity: 0.95; margin-bottom: 15px;">Following the <a href="https://seagl.org" target="_blank" style="color: #ffd700; text-decoration: none; font-weight: bold;">SeaGL</a> event (starts 6:30pm)</div>
+                <div style="font-size: 1.1em; padding: 15px; background: rgba(255,215,0,0.2); border-radius: 8px; border-left: 4px solid #ffd700;">
+                    <strong>Silent Auction Details:</strong> Browse items with clipboards after Esther's Jazz Band performs
+                </div>
+            </div>
+        </div>
+        
+        <div class="jazz-section">
+            <div class="jazz-content">
+                <h2>Esther's Jazz Band</h2>
+                <p>Live Entertainment</p>
+                <div class="jazz-image">
+                    <img src="https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=800&h=500&fit=crop" alt="Jazz Band with Female Singer">
+                </div>
+            </div>
+        </div>
+        
+        <div class="auction-items">
+            <h2>Auction Items</h2>
+            
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-header">
+                        <h3 class="item-title">Fancy Group Dinner Party</h3>
+                        <p class="item-coordinator">Coordinator: Esther</p>
+                    </div>
+                    <p class="item-description">
+                        Join us for an intimate and unforgettable evening at Esther's home, where exceptional cuisine meets meaningful impact. This exclusive fundraising dinner welcomes up to 8 guests for a carefully curated multi-course meal in an elegant, intimate setting. Esther will prepare a spectacular menu featuring seasonal ingredients and dishes crafted with passion and expertise.
+                    </p>
+                    <div class="item-footer">
+                        <div class="value-box">
+                            <div class="label">Estimated Value</div>
+                            <div class="amount">$1,000</div>
+                        </div>
+                        <button class="bid-button">Place Bid at Event</button>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <h3 class="item-title">Custom Painting</h3>
+                        <p class="item-coordinator">Coordinator: Ananya</p>
+                    </div>
+                    <p class="item-description">
+                        This is a rare opportunity to commission a one-of-a-kind masterpiece from one of today's most celebrated artists. The winning bidder will collaborate directly to create a custom painting tailored to their vision—whether it's a captivating portrait, a breathtaking landscape, or an imaginative abstract work. This original piece will become a treasured centerpiece in your home.
+                    </p>
+                    <div class="item-footer">
+                        <div class="value-box">
+                            <div class="label">Estimated Value</div>
+                            <div class="amount">$400</div>
+                        </div>
+                        <button class="bid-button">Place Bid at Event</button>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <h3 class="item-title">Spokane Adventure & Dinner for 2</h3>
+                        <p class="item-coordinator">Coordinator: Ted</p>
+                    </div>
+                    <p class="item-description">
+                        Experience the natural beauty and culinary excellence of Spokane! Your host will craft a personalized day exploring stunning landscapes—an invigorating hike through Riverside State Park, a leisurely walk along the Centennial Trail, or a scenic drive through South Hill and Manito Park. Concludes with dinner at a premier restaurant like Travolata or Wild Sage Bistro. ~3 hours total.
+                    </p>
+                    <div class="item-footer">
+                        <div class="value-box">
+                            <div class="label">Estimated Value</div>
+                            <div class="amount">$250</div>
+                        </div>
+                        <div class="bid-box">
+                            <div class="label">Minimum Bid</div>
+                            <div class="amount">$95</div>
+                        </div>
+                        <button class="bid-button">Place Bid at Event</button>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <h3 class="item-title">Dog Walking or Pet Sitting</h3>
+                        <p class="item-coordinator">Coordinator: Ted</p>
+                    </div>
+                    <p class="item-description">
+                        Give your furry friends the care they deserve! Professional dog walking or pet sitting for up to 2 hours. Perfect for midday walks, weekend care, or daily check-ins for dogs, cats, and small pets. Based in Spokane but available monthly in Seattle with advance notice. Your pets will thank you!
+                    </p>
+                    <div class="item-footer">
+                        <div class="value-box">
+                            <div class="label">Estimated Value</div>
+                            <div class="amount">$75</div>
+                        </div>
+                        <div class="bid-box">
+                            <div class="label">Minimum Bid</div>
+                            <div class="amount">$30</div>
+                        </div>
+                        <button class="bid-button">Place Bid at Event</button>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <h3 class="item-title">Netgear C6250 Cable Modem/Router</h3>
+                        <p class="item-coordinator">Coordinator: Ammar</p>
+                    </div>
+                    <p class="item-description">
+                        Unopened modem/router combo in original box. Perfect for internet plans with up to 300 Mbps. Brand new condition, ready to set up and start using immediately.
+                    </p>
+                    <div class="item-footer">
+                        <div class="value-box">
+                            <div class="label">Estimated Value</div>
+                            <div class="amount">$140</div>
+                        </div>
+                        <button class="bid-button">Place Bid at Event</button>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <h3 class="item-title">SMSL A300 Stereo Amplifier</h3>
+                        <p class="item-coordinator">Coordinator: Ted</p>
+                    </div>
+                    <p class="item-description">
+                        Used but excellent condition! Features neutral sound signature with well-controlled bass, quick microdynamics, and great soundstage. Can drive demanding speakers and bridge to mono mode for twice the power. Includes original box, manual, remote, cables, and bluetooth antenna.
+                    </p>
+                    <div class="item-footer">
+                        <div class="value-box">
+                            <div class="label">Estimated Value</div>
+                            <div class="amount">$200</div>
+                        </div>
+                        <div class="bid-box">
+                            <div class="label">Minimum Bid</div>
+                            <div class="amount">$95</div>
+                        </div>
+                        <button class="bid-button">Place Bid at Event</button>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <h3 class="item-title">WD 4TB RED NAS Hard Drive</h3>
+                        <p class="item-coordinator">Coordinator: Ted</p>
+                    </div>
+                    <p class="item-description">
+                        Brand new, never used! 4TB 3.5" HDD 5400 RPM for SAN/NAS systems. Model WD40EFRX. New in unopened ESD bag. SATA 6Gb/s with NASware 3.0 technology for reliable network storage.
+                    </p>
+                    <div class="item-footer">
+                        <div class="value-box">
+                            <div class="label">Estimated Value</div>
+                            <div class="amount">$50</div>
+                        </div>
+                        <div class="bid-box">
+                            <div class="label">Minimum Bid</div>
+                            <div class="amount">$15</div>
+                        </div>
+                        <button class="bid-button">Place Bid at Event</button>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <h3 class="item-title">Thermalright CPU Cooler</h3>
+                        <p class="item-coordinator">Coordinator: Ted</p>
+                    </div>
+                    <p class="item-description">
+                        New in box Silver Soul 110 Black CPU cooler. 110mm height, compatible with Intel 17xx or AMD AM4 processors. Perfect for your next PC build or upgrade!
+                    </p>
+                    <div class="item-footer">
+                        <div class="value-box">
+                            <div class="label">Estimated Value</div>
+                            <div class="amount">$35</div>
+                        </div>
+                        <div class="bid-box">
+                            <div class="label">Minimum Bid</div>
+                            <div class="amount">$10</div>
+                        </div>
+                        <button class="bid-button">Place Bid at Event</button>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <h3 class="item-title">Pet Photography Session</h3>
+                        <p class="item-coordinator">Coordinator: Ted</p>
+                    </div>
+                    <p class="item-description">
+                        Professional pet photography with 25 years of experience! Candid and natural photos at your house or nearby park using various film and digital cameras. Includes all original film negatives, scans, raw and JPG digital images. Based in Spokane, available monthly in Seattle with scheduling. ~2 hours.
+                    </p>
+                    <div class="item-footer">
+                        <div class="value-box">
+                            <div class="label">Estimated Value</div>
+                            <div class="amount">$300</div>
+                        </div>
+                        <div class="bid-box">
+                            <div class="label">Minimum Bid</div>
+                            <div class="amount">$100</div>
+                        </div>
+                        <button class="bid-button">Place Bid at Event</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <h3>Thank you for supporting Seattle Community Network!</h3>
+            <p>All proceeds benefit our community programs and initiatives.</p>
+        </div>
+    </div>
+</body>
+</html>
