@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esther's Jazz Band - November 7</title>
+    <style>
+        @page {
+            size: 8.5in 11in;
+            margin: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 8.5in;
+            height: 11in;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Arial', sans-serif;
+            position: relative;
+        }
+        
+        @media print {
+            html, body {
+                width: 8.5in;
+                height: 11in;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        }
+        
+        .sparkle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255,215,0,0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .container {
+            width: 100%;
+            height: 100%;
+            padding: 0.35in 0.45in;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 0.1in;
+        }
+        
+        .free-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a6f);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            margin-bottom: 10px;
+            transform: rotate(-2deg);
+        }
+        
+        h1 {
+            font-size: 56px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255,215,0,0.5);
+            margin-bottom: 5px;
+            letter-spacing: 3px;
+            line-height: 1;
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            color: #00d4ff;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        .jazz-graphic {
+            width: 100%;
+            height: 1.8in;
+            margin: 0.15in 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .saxophone {
+            font-size: 140px;
+            filter: drop-shadow(0 0 20px rgba(255,215,0,0.6));
+        }
+        
+        .music-notes {
+            position: absolute;
+            font-size: 40px;
+            animation: float 3s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(10deg); }
+        }
+        
+        .note1 { left: 15%; top: 20%; animation-delay: 0s; }
+        .note2 { right: 20%; top: 30%; animation-delay: 0.5s; }
+        .note3 { left: 25%; bottom: 25%; animation-delay: 1s; }
+        .note4 { right: 15%; bottom: 20%; animation-delay: 1.5s; }
+        
+        .event-details {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 0.1in 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        
+        .detail-row {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 20px;
+            color: white;
+        }
+        
+        .icon {
+            font-size: 28px;
+            margin-right: 12px;
+            min-width: 35px;
+        }
+        
+        .detail-text {
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        .seagl-section {
+            background: linear-gradient(90deg, rgba(0,212,255,0.2), rgba(255,107,107,0.2));
+            border-left: 4px solid #00d4ff;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+        
+        .seagl-text {
+            font-size: 16px;
+            color: #ffffff;
+            line-height: 1.5;
+        }
+        
+        .auction-banner {
+            background: linear-gradient(45deg, #ff6b6b, #ffd700);
+            color: #1a1a2e;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 12px;
+            box-shadow: 0 6px 20px rgba(255,215,0,0.4);
+        }
+        
+        .auction-banner h2 {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+        
+        .auction-text {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 0.15in;
+            font-size: 15px;
+            color: #00d4ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkle" style="width: 4px; height: 4px; top: 10%; left: 15%;"></div>
+    <div class="sparkle" style="width: 6px; height: 6px; top: 25%; right: 20%; animation-delay: 0.5s;"></div>
+    <div class="sparkle" style="width: 3px; height: 3px; top: 45%; left: 10%; animation-delay: 1s;"></div>
+    <div class="sparkle" style="width: 5px; height: 5px; bottom: 30%; right: 15%; animation-delay: 1.5s;"></div>
+    <div class="sparkle" style="width: 4px; height: 4px; bottom: 15%; left: 25%; animation-delay: 2s;"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="free-badge">🎉 FREE EVENT 🎉</div>
+            <h1>ESTHER'S<br>JAZZ BAND</h1>
+            <div class="subtitle">Live Performance</div>
+        </div>
+        
+        <div class="jazz-graphic">
+            <div class="music-notes note1">🎵</div>
+            <div class="music-notes note2">🎶</div>
+            <div class="music-notes note3">🎵</div>
+            <div class="music-notes note4">🎶</div>
+            <div class="saxophone">🎷</div>
+        </div>
+        
+        <div class="event-details">
+            <div class="detail-row">
+                <span class="icon">📅</span>
+                <span class="detail-text"><span class="highlight">November 7, 2025</span></span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="icon">⏰</span>
+                <span class="detail-text"><span class="highlight">7:30 PM - 9:30 PM</span></span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="icon">📍</span>
+                <span class="detail-text"><span class="highlight">Ada's Technical Bookstore</span> • Seattle</span>
+            </div>
+            
+            <div class="seagl-section">
+                <div class="seagl-text">
+                    <strong>Following the SeaGL Social!</strong><br>
+                    Join us after the conference for an evening of incredible jazz<br>
+                    🌐 <span class="highlight">fundraiser.seattlecn.org</span> • seagl.org
+                </div>
+            </div>
+        </div>
+        
+        <div class="auction-banner">
+            <h2>🎨 Silent Auction 🎨</h2>
+            <div class="auction-text">
+                Supporting Seattle Community Network
+            </div>
+        </div>
+        
+        <div class="footer">
+            <strong>Don't miss this amazing night of music, community & tech!</strong>
+        </div>
+    </div>
+</body>
+</html>
