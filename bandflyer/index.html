@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Si Tu Savais Concert Poster</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Courier+Prime:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: letter;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Courier Prime', monospace;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .poster {
+            background: #fff;
+            width: 8.5in;
+            height: 11in;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #000;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            background: #000;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 5px solid #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.03) 10px,
+                rgba(255,255,255,0.03) 20px
+            );
+        }
+
+        .band-name {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 3.5em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 4px 4px 0px #ff0055, 8px 8px 0px #00ffff;
+            margin-bottom: 5px;
+            letter-spacing: 5px;
+            transform: rotate(-1deg);
+            position: relative;
+        }
+
+        .event-type {
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.1em;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            background: #ff0055;
+            display: inline-block;
+            padding: 8px 20px;
+            transform: rotate(1deg);
+            border: 2px solid #fff;
+        }
+
+        .collage {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 2.2in);
+            gap: 0;
+            background: #000;
+            border-top: 5px solid #000;
+            border-bottom: 5px solid #000;
+        }
+
+        .collage-item {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            border: 3px solid #000;
+            transform: rotate(0deg);
+            transition: transform 0.2s;
+        }
+
+        .collage-item:nth-child(odd) {
+            transform: rotate(-0.5deg);
+        }
+
+        .collage-item:nth-child(even) {
+            transform: rotate(0.5deg);
+        }
+
+        .collage-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: contrast(1.2) saturate(0.9);
+        }
+
+        .collage-item:nth-child(1) img,
+        .collage-item:nth-child(5) img {
+            object-position: center top;
+        }
+
+        .collage-item:nth-child(4) img {
+            object-position: center 30%;
+        }
+
+        .info-section {
+            padding: 15px 20px 5px 20px;
+            background: #fff;
+            position: relative;
+        }
+
+        .info-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20px;
+            right: 20px;
+            height: 2px;
+            background: repeating-linear-gradient(
+                90deg,
+                #000,
+                #000 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+
+        .schedule-box {
+            background: #ffff00;
+            border: 4px solid #000;
+            padding: 12px;
+            margin-bottom: 10px;
+            transform: rotate(-1deg);
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+        }
+
+        .schedule-box h3 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.3em;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .schedule-item {
+            font-weight: bold;
+            margin: 5px 0;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        .free-badge {
+            background: #ff0055;
+            color: #fff;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.8em;
+            padding: 8px 10px;
+            border: 4px solid #000;
+            display: inline-block;
+            transform: rotate(2deg);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+            margin: 10px 0;
+        }
+
+        .venue-box {
+            background: #00ffff;
+            border: 4px solid #000;
+            padding: 10px;
+            margin-bottom: 5px;
+            transform: rotate(1deg);
+            box-shadow: -5px 5px 0 rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .venue-box h4 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .venue-box p {
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .fundraiser-box {
+            background: #000;
+            color: #00ff00;
+            border: 4px solid #00ff00;
+            padding: 12px;
+            text-align: center;
+            margin-bottom: 5px;
+            font-family: 'Courier Prime', monospace;
+            box-shadow: 0 0 10px rgba(0,255,0,0.3);
+        }
+
+        .fundraiser-box h3 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .fundraiser-box p {
+            font-size: 0.85em;
+            margin: 3px 0;
+        }
+
+        .fundraiser-box .time {
+            font-size: 1.4em;
+            margin-top: 5px;
+            font-weight: bold;
+            color: #ffff00;
+        }
+
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 5px;
+            justify-content: space-around;
+            background: #fff;
+        }
+
+        .qr-item-1 {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 3px solid #000;
+            padding: 10px;
+            background: #fff;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.4);
+            flex: 1;
+            max-width: 180px;
+        }
+
+        .qr-item-2 {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 3px solid #000;
+            padding: 10px;
+            background: #fff;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.4);
+            flex: 1;
+            max-width: 200px;
+        }
+
+        .qr-code {
+            width: 110px;
+            height: 110px;
+            margin-bottom: 5px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #000;
+            overflow: hidden;
+        }
+
+        .qr-code canvas,
+        .qr-code img {
+            display: block !important;
+            max-width: 110px !important;
+            max-height: 110px !important;
+            width: 110px !important;
+            height: 110px !important;
+        }
+
+        .qr-code canvas:nth-child(n+2),
+        .qr-code img:nth-child(n+2) {
+            display: none !important;
+        }
+
+        .qr-code img {
+            object-fit: contain !important;
+        }
+
+        .qr-label {
+            font-size: 0.7em;
+            color: #000;
+            font-weight: bold;
+            line-height: 1.3;
+            text-transform: uppercase;
+        }
+
+        .upload-section {
+            padding: 15px 20px;
+            background: #f0f0f0;
+            text-align: center;
+            border-top: 3px dashed #000;
+        }
+
+        .upload-button {
+            background: #ff0055;
+            color: #fff;
+            padding: 10px 20px;
+            border: 3px solid #000;
+            border-radius: 0;
+            font-size: 0.9em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+            font-family: 'Courier Prime', monospace;
+            text-transform: uppercase;
+        }
+
+        .upload-button:hover {
+            background: #000;
+            color: #ff0055;
+        }
+
+        #imageInput {
+            display: none;
+        }
+
+        .upload-section p {
+            margin: 5px 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .poster {
+                width: 8.5in;
+                height: 11in;
+                page-break-after: avoid;
+                border: none;
+                box-shadow: none;
+            }
+
+            .upload-section {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .poster {
+                width: 100%;
+                height: auto;
+            }
+
+            .band-name {
+                font-size: 2em;
+            }
+
+            .collage {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 180px);
+            }
+
+            .qr-section {
+                flex-direction: row;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="header">
+            <div class="band-name">Si Tu Savais</div>
+            <div class="event-type">*** FREE LIVE CONCERT ***</div>
+        </div>
+
+        <div class="collage" id="collage">
+            <div class="collage-item">
+                <img id="img1" src="image_1.jpg" alt="Band Member 1">
+            </div>
+            <div class="collage-item">
+                <img id="img2" src="image_2.jpg" alt="Band Member 2">
+            </div>
+            <div class="collage-item">
+                <img id="img3" src="image_3.jpg" alt="Band Member 3">
+            </div>
+            <div class="collage-item">
+                <img id="img4" src="image_4.png" alt="Band Member 4">
+            </div>
+            <div class="collage-item">
+                <img id="img5" src="image_5.jpg" alt="Band Member 5">
+            </div>
+            <div class="collage-item">
+                <img id="img6" src="image_6.jpg" alt="Band Member 6">
+            </div>
+        </div>
+
+        <div class="upload-section" style="display: none;">
+            <p style="color: #000; font-size: 0.85em; margin-bottom: 5px; font-weight: bold;">⚠ Images will load from: image_1.jpg, image_2.jpg, image_3.jpg, image_4.png, image_5.jpg, image_6.jpg ⚠</p>
+            <p style="color: #666; font-size: 0.75em;">(Make sure these files are in the same directory as this HTML file)</p>
+        </div>
+
+        <div class="info-section">
+            <div class="schedule-box">
+                <h3>⚡ TONIGHT'S LINEUP ⚡</h3>
+                <div class="schedule-item">6:30 PM → SeaGL Social Starts</div>
+                <div class="schedule-item">7:30 PM - 9:30 PM → Si Tu Savais LIVE!</div>
+            </div>
+
+            <div class="bottom-section">
+
+                <div class="qr-item-1">
+                    <div class="qr-code">
+                        <img src="fundraiserqr.jpg" alt="Fundraiser QR Code" style="width: 110px; height: 110px; object-fit: contain;">
+                    </div>
+                    <div class="qr-label">Fundraiser<br>fundraiser.seattlecn.org</div>
+                </div>    
+
+                <div>
+
+                    <div class="venue-box">
+                        <h4>📍 LOCATION</h4>
+                        <p>The Lab at Ada's Technical Books</p>
+                        <p style="margin-top: 5px; font-size: 1.1em;">November 7</p>
+                    </div>
+
+                    <div class="fundraiser-box">
+                        <h3>▶ SILENT AUCTION ◀</h3>
+                        <p>SEATTLE COMMUNITY NETWORK FUNDRAISER EVENT</p>
+                        <p class="time">9:30 PM</p>
+                    </div>
+
+                </div> 
+
+                <div class="qr-item-2">
+                    <div class="qr-code">
+                        <img src="scnqr.jpg" alt="Community Network QR Code" style="width: 110px; height: 110px; object-fit: contain;">
+                    </div>
+                    <div class="qr-label">Community Network<br>seattlecommunitynetwork.org</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
