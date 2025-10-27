@@ -3,365 +3,448 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Si Tu Savais Fundraiser Concert</title>
+    <title>Si Tu Savais Concert Poster</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Courier+Prime:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         @page {
             size: letter;
             margin: 0;
         }
-        
+
         body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #1a1a2e;
+            font-family: 'Courier Prime', monospace;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-        
-        .flyer {
+
+        .poster {
+            background: #fff;
             width: 8.5in;
             height: 11in;
-            background: linear-gradient(135deg, rgba(139, 24, 116, 0.3) 0%, rgba(26, 26, 46, 0.5) 50%, rgba(45, 74, 138, 0.3) 100%);
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #000;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            background: #000;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 5px solid #fff;
             position: relative;
             overflow: hidden;
         }
-        
-        .top-border {
+
+        .header::before {
+            content: '';
             position: absolute;
-            top: 30px;
-            left: 30px;
-            width: calc(100% - 60px);
-            height: 8px;
-            background: linear-gradient(90deg, #ff6b9d 0%, #ffd93d 50%, #6bcfff 100%);
-            opacity: 0.8;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.03) 10px,
+                rgba(255,255,255,0.03) 20px
+            );
         }
-        
-        .bottom-border {
-            position: absolute;
-            bottom: 30px;
-            left: 30px;
-            width: calc(100% - 60px);
-            height: 8px;
-            background: linear-gradient(90deg, #ff6b9d 0%, #ffd93d 50%, #6bcfff 100%);
-            opacity: 0.8;
-        }
-        
+
         .band-name {
-            text-align: center;
-            font-family: Georgia, serif;
-            font-size: 72px;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 3.5em;
             font-weight: bold;
-            background: linear-gradient(90deg, #ff6b9d 0%, #ffd93d 50%, #6bcfff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-top: 60px;
-            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 4px 4px 0px #ff0055, 8px 8px 0px #00ffff;
+            margin-bottom: 5px;
+            letter-spacing: 5px;
+            transform: rotate(-1deg);
+            position: relative;
         }
-        
-        .subtitle {
-            text-align: center;
-            font-size: 24px;
-            color: #ffd93d;
-            font-style: italic;
-            margin-top: -10px;
+
+        .event-type {
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.1em;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            background: #ff0055;
+            display: inline-block;
+            padding: 8px 20px;
+            transform: rotate(1deg);
+            border: 2px solid #fff;
         }
-        
-        .subtitle a {
-            color: #6bcfff;
-            text-decoration: none;
-        }
-        
-        .subtitle a:hover {
-            text-decoration: underline;
-        }
-        
-        .photo-montage {
+
+        .collage {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            gap: 15px;
-            padding: 30px 60px;
-            position: relative;
-            height: 320px;
+            grid-template-rows: repeat(2, 2.2in);
+            gap: 0;
+            background: #000;
+            border-top: 5px solid #000;
+            border-bottom: 5px solid #000;
         }
-        
-        .photo-container {
-            border: 3px solid;
+
+        .collage-item {
+            width: 100%;
+            height: 100%;
             overflow: hidden;
             position: relative;
-            background: #2d2d44;
+            border: 3px solid #000;
+            transform: rotate(0deg);
+            transition: transform 0.2s;
         }
-        
-        .photo-container:nth-child(1) { 
-            border-color: #ff6b9d;
-            grid-column: 1;
-            grid-row: 1 / 3;
+
+        .collage-item:nth-child(odd) {
+            transform: rotate(-0.5deg);
         }
-        .photo-container:nth-child(2) { 
-            border-color: #ffd93d;
-            grid-column: 2;
-            grid-row: 1;
+
+        .collage-item:nth-child(even) {
+            transform: rotate(0.5deg);
         }
-        .photo-container:nth-child(3) { 
-            border-color: #6bcfff;
-            grid-column: 3;
-            grid-row: 1 / 3;
-        }
-        .photo-container:nth-child(3) img {
-            object-position: center 60%;
-        }
-        .photo-container:nth-child(4) { 
-            border-color: #ff6b9d;
-            grid-column: 2;
-            grid-row: 2;
-        }
-        .photo-container:nth-child(4) img {
-            object-position: center 20%;
-        }
-        .photo-container:nth-child(5) { 
-            border-color: #ffd93d;
-            grid-column: 2 / 4;
-            grid-row: 2;
-            display: none;
-        }
-        
-        .photo-container img {
+
+        .collage-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
-            display: block;
-            filter: saturate(0.9) brightness(1.05) contrast(1.1);
+            filter: contrast(1.2) saturate(0.9);
         }
-        
-        .music-notes {
-            position: absolute;
-            font-size: 48px;
-            opacity: 0.5;
+
+        .collage-item:nth-child(1) img,
+        .collage-item:nth-child(5) img {
+            object-position: center top;
         }
-        
-        .note1 { top: 190px; left: 40px; color: #ff6b9d; }
-        .note2 { top: 210px; right: 50px; font-size: 40px; color: #6bcfff; }
-        .note3 { top: 380px; right: 40px; font-size: 44px; color: #ffd93d; }
-        
-        .event-details {
-            margin: 0 80px 40px 80px;
-            background: #2d2d44;
-            border: 4px solid;
-            border-image: linear-gradient(90deg, #ff6b9d 0%, #ffd93d 50%, #6bcfff 100%) 1;
-            border-radius: 10px;
-            padding: 20px;
+
+        .collage-item:nth-child(4) img {
+            object-position: center 30%;
         }
-        
-        .fundraiser-banner {
-            background: #8B1874;
-            text-align: center;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-        }
-        
-        .fundraiser-banner h2 {
-            margin: 0;
-            color: white;
-            font-size: 26px;
-        }
-        
-        .benefiting {
-            text-align: center;
-            color: #ffd93d;
-            font-size: 20px;
-            font-weight: bold;
-            margin: 10px 0 5px 0;
-        }
-        
-        .organization {
-            text-align: center;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            margin: 5px 0 15px 0;
-        }
-        
-        .organization a {
-            color: white;
-            text-decoration: none;
-        }
-        
-        .organization a:hover {
-            text-decoration: underline;
-            color: #6bcfff;
-        }
-        
-        .date {
-            text-align: center;
-            color: #ff6b9d;
-            font-size: 30px;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        
-        .time {
-            text-align: center;
-            color: #6bcfff;
-            font-size: 26px;
-            margin: 8px 0;
-        }
-        
-        .venue {
-            text-align: center;
-            color: white;
-            font-size: 22px;
-            font-weight: bold;
-            margin: 15px 0;
-        }
-        
-        .venue a {
-            color: white;
-            text-decoration: none;
-        }
-        
-        .venue a:hover {
-            text-decoration: underline;
-            color: #6bcfff;
-        }
-        
-        .auction {
-            background: #2d4a8a;
-            text-align: center;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
+
+        .info-section {
+            padding: 15px 20px 5px 20px;
+            background: #fff;
             position: relative;
         }
-        
-        .auction p {
-            margin: 0 0 8px 0;
-            color: #ffd93d;
-            font-size: 19px;
-            font-weight: bold;
-        }
-        
-        .auction-url {
-            margin: 0;
-            font-size: 16px;
-            color: #6bcfff;
-            font-weight: bold;
-        }
-        
-        .auction-url a {
-            color: #6bcfff;
-            text-decoration: none;
-        }
-        
-        .auction-url a:hover {
-            text-decoration: underline;
-        }
-        
-        .star {
-            color: #ffd93d;
-            font-size: 24px;
+
+        .info-section::before {
+            content: '';
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 0;
+            left: 20px;
+            right: 20px;
+            height: 2px;
+            background: repeating-linear-gradient(
+                90deg,
+                #000,
+                #000 10px,
+                transparent 10px,
+                transparent 20px
+            );
         }
-        
-        .star-left { left: 20px; }
-        .star-right { right: 20px; }
-        
-        .footer {
-            text-align: center;
-            color: #ccc;
-            font-size: 16px;
-            position: absolute;
-            bottom: 35px;
-            width: 100%;
+
+        .schedule-box {
+            background: #ffff00;
+            border: 4px solid #000;
+            padding: 12px;
+            margin-bottom: 10px;
+            transform: rotate(-1deg);
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
         }
-        
-        .footer a {
-            color: #6bcfff;
-            text-decoration: none;
+
+        .schedule-box h3 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.3em;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .schedule-item {
             font-weight: bold;
+            margin: 5px 0;
+            font-size: 0.95em;
+            line-height: 1.4;
         }
-        
-        .footer a:hover {
-            text-decoration: underline;
+
+        .free-badge {
+            background: #ff0055;
+            color: #fff;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.8em;
+            padding: 8px 20px;
+            border: 4px solid #000;
+            display: inline-block;
+            transform: rotate(2deg);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+            margin: 10px 0;
         }
-        
-        .footer-url {
+
+        .venue-box {
+            background: #00ffff;
+            border: 4px solid #000;
+            padding: 10px;
+            margin-bottom: 10px;
+            transform: rotate(1deg);
+            box-shadow: -5px 5px 0 rgba(0,0,0,0.3);
             text-align: center;
-            color: #6bcfff;
-            font-size: 19px;
+        }
+
+        .venue-box h4 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .venue-box p {
             font-weight: bold;
-            margin: 15px 0 5px 0;
+            font-size: 0.9em;
         }
-        
-        .footer-url a {
-            color: #6bcfff;
-            text-decoration: none;
+
+        .fundraiser-box {
+            background: #000;
+            color: #00ff00;
+            border: 4px solid #00ff00;
+            padding: 12px;
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: 'Courier Prime', monospace;
+            box-shadow: 0 0 10px rgba(0,255,0,0.3);
         }
-        
-        .footer-url a:hover {
-            text-decoration: underline;
+
+        .fundraiser-box h3 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        
+
+        .fundraiser-box p {
+            font-size: 0.85em;
+            margin: 3px 0;
+        }
+
+        .fundraiser-box .time {
+            font-size: 1.4em;
+            margin-top: 5px;
+            font-weight: bold;
+            color: #ffff00;
+        }
+
+        .qr-section {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 60px;
+            padding: 15px 40px 20px 40px;
+            background: #fff;
+        }
+
+        .qr-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 3px solid #000;
+            padding: 10px;
+            background: #fff;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.4);
+            flex: 1;
+            max-width: 180px;
+        }
+
+        .qr-code {
+            width: 110px;
+            height: 110px;
+            margin-bottom: 8px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #000;
+            overflow: hidden;
+        }
+
+        .qr-code canvas,
+        .qr-code img {
+            display: block !important;
+            max-width: 110px !important;
+            max-height: 110px !important;
+            width: 110px !important;
+            height: 110px !important;
+        }
+
+        .qr-code canvas:nth-child(n+2),
+        .qr-code img:nth-child(n+2) {
+            display: none !important;
+        }
+
+        .qr-code img {
+            object-fit: contain !important;
+        }
+
+        .qr-label {
+            font-size: 0.7em;
+            color: #000;
+            font-weight: bold;
+            line-height: 1.3;
+            text-transform: uppercase;
+        }
+
+        .upload-section {
+            padding: 15px 20px;
+            background: #f0f0f0;
+            text-align: center;
+            border-top: 3px dashed #000;
+        }
+
+        .upload-button {
+            background: #ff0055;
+            color: #fff;
+            padding: 10px 20px;
+            border: 3px solid #000;
+            border-radius: 0;
+            font-size: 0.9em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+            font-family: 'Courier Prime', monospace;
+            text-transform: uppercase;
+        }
+
+        .upload-button:hover {
+            background: #000;
+            color: #ff0055;
+        }
+
+        #imageInput {
+            display: none;
+        }
+
+        .upload-section p {
+            margin: 5px 0;
+        }
+
         @media print {
-            body { background: white; }
-            .flyer { box-shadow: none; }
+            body {
+                background: white;
+            }
+            
+            .poster {
+                width: 8.5in;
+                height: 11in;
+                page-break-after: avoid;
+                border: none;
+                box-shadow: none;
+            }
+
+            .upload-section {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .poster {
+                width: 100%;
+                height: auto;
+            }
+
+            .band-name {
+                font-size: 2em;
+            }
+
+            .collage {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 180px);
+            }
+
+            .qr-section {
+                flex-direction: row;
+                gap: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="flyer">
-        <div class="top-border"></div>
-        
-        <h1 class="band-name">Si Tu Savais</h1>
-        <p class="subtitle">Live in Concert (FREE) - Following the <a href="https://seagl.org" target="_blank">SeaGL</a> social</p>
-        
-        <div class="photo-montage">
-            <div class="photo-container">
-                <img src="image_1.jpg" alt="Band member on bass">
+    <div class="poster">
+        <div class="header">
+            <div class="band-name">Si Tu Savais</div>
+            <div class="event-type">*** LIVE ***</div>
+        </div>
+
+        <div class="collage" id="collage">
+            <div class="collage-item">
+                <img id="img1" src="image_1.jpg" alt="Band Member 1">
             </div>
-            <div class="photo-container">
-                <img src="image_2.jpg" alt="Band member with guitar">
+            <div class="collage-item">
+                <img id="img2" src="image_2.jpg" alt="Band Member 2">
             </div>
-            <div class="photo-container">
-                <img src="image_3.jpg" alt="Vocalist performing">
+            <div class="collage-item">
+                <img id="img3" src="image_3.jpg" alt="Band Member 3">
             </div>
-            <div class="photo-container">
-                <img src="image_4.png" alt="Guitarist on stage">
+            <div class="collage-item">
+                <img id="img4" src="image_4.png" alt="Band Member 4">
             </div>
-            <div class="photo-container">
-                <img src="image_5.jpg" alt="Guitarist with acoustic">
+            <div class="collage-item">
+                <img id="img5" src="image_5.jpg" alt="Band Member 5">
+            </div>
+            <div class="collage-item">
+                <img id="img6" src="image_6.jpg" alt="Band Member 6">
             </div>
         </div>
-        
-        <div class="music-notes note1">♪</div>
-        <div class="music-notes note2">♫</div>
-        <div class="music-notes note3">♪</div>
-        
-        <div class="event-details">
-            <div class="fundraiser-banner">
-                <h2>FUNDRAISER EVENT</h2>
+
+        <div class="upload-section" style="display: none;">
+            <p style="color: #000; font-size: 0.85em; margin-bottom: 5px; font-weight: bold;">⚠ Images will load from: image_1.jpg, image_2.jpg, image_3.jpg, image_4.png, image_5.jpg, image_6.jpg ⚠</p>
+            <p style="color: #666; font-size: 0.75em;">(Make sure these files are in the same directory as this HTML file)</p>
+        </div>
+
+        <div class="info-section">
+            <center><div class="free-badge">FREE!</div></center>
+
+            <div class="schedule-box">
+                <h3>⚡ TONIGHT'S LINEUP ⚡</h3>
+                <div class="schedule-item">6:30 PM → SeaGL Social Starts</div>
+                <div class="schedule-item">7:30 PM - 9:30 PM → Si Tu Savais LIVE!</div>
             </div>
-            
-            <p class="benefiting">Benefiting</p>
-            <p class="organization"><a href="https://seattlecommunitynetwork.org" target="_blank">Seattle Community Network</a></p>
-            
-            <p class="date">Friday, November 7, 2025</p>
-            <p class="time">7:30 PM - 9:30 PM</p>
-            
-            <p class="venue"><a href="https://adasbooks.com" target="_blank">Ada's Technical Bookstore and Cafe</a></p>
-            
-            <div class="auction">
-                <span class="star star-left">★</span>
-                <p>Silent Auction to Follow</p>
-                <p class="auction-url"><a href="https://fundraiser.seattlecn.org" target="_blank">fundraiser.seattlecn.org</a></p>
-                <span class="star star-right">★</span>
+
+            <div class="venue-box">
+                <h4>📍 LOCATION</h4>
+                <p>The Lab at Ada's Technical Books</p>
+                <p style="margin-top: 5px; font-size: 1.1em;">November 7</p>
+            </div>
+
+            <div class="fundraiser-box">
+                <h3>▶ SILENT AUCTION ◀</h3>
+                <p>SEATTLE COMMUNITY NETWORK</p>
+                <p>FUNDRAISER EVENT</p>
+                <p class="time">9:30 PM</p>
+            </div>
+
+            <div class="qr-section">
+                <div class="qr-item">
+                    <div class="qr-code">
+                        <img src="fundraiserqr.jpg" alt="Fundraiser QR Code" style="width: 110px; height: 110px; object-fit: contain;">
+                    </div>
+                    <div class="qr-label">Fundraiser<br>fundraiser.seattlecn.org</div>
+                </div>
+                <div class="qr-item">
+                    <div class="qr-code">
+                        <img src="scnqr.jpg" alt="Community Network QR Code" style="width: 110px; height: 110px; object-fit: contain;">
+                    </div>
+                    <div class="qr-label">Community Network<br>seattlecommunitynetwork.org</div>
+                </div>
             </div>
         </div>
-        
-        <div class="bottom-border"></div>
     </div>
 </body>
 </html>
